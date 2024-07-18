@@ -1,0 +1,336 @@
+/* 主題色變數設定 */
+:root[data-theme="blue"] {
+  --lighter-primary: #f1f4ff;
+  --normal-primary: #bdc4e8;
+  --darker-primary: #a1ade9;
+}
+
+:root[data-theme="green"] {
+  --lighter-primary: #e6f7ef;
+  --normal-primary: #ace3c8;
+  --darker-primary: #75bf9b;
+}
+
+:root[data-theme="yellow"] {
+  --lighter-primary: #faf5ea;
+  --normal-primary: #f4d276;
+  --darker-primary: #f1b100;
+}
+
+:root[data-theme="pink"] {
+  --lighter-primary: #fcf1fb;
+  --normal-primary: #ecc9e8;
+  --darker-primary: #e193d6;
+}
+
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+html,
+body {
+  background: #f0f0f0;
+  color: rgb(49, 49, 49);
+  font-size: 1rem;
+  font-family: "Alata", "Noto Sans TC", sans-serif;
+  font-weight: 400;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+}
+
+/* 清單外容器 */
+#todo-container {
+  width: 500px;
+  height: calc(100svh - 48px);
+  padding: 24px;
+  background-color: #ffffff;
+  border: 1px solid var(--normal-primary);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 24px 0px;
+  position: relative;
+  overflow: visible;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+#title {
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  max-width: 100%;
+  transform-origin: left center;
+  overflow: hidden; /* 隱藏超出容器的内容 */
+  text-overflow: ellipsis;
+  white-space: nowrap; /* 不換行 */
+}
+
+#title[contenteditable="true"] {
+  border-bottom: 1.2px dashed var(--darker-primary);
+  padding-bottom: 8px;
+}
+
+/* 清單本體 */
+#todo-list {
+  list-style: none;
+  margin: 24px 0;
+  width: 100%;
+  overflow-x: auto;
+  padding-right: 4px;
+  /* 滾動條 */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #c4c4c4 #f1f1f1; /* Firefox */
+}
+
+#todo-list::-webkit-scrollbar {
+  width: 16px;
+}
+
+#todo-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#todo-list::-webkit-scrollbar-thumb {
+  background-color: #c4c4c4; /* scroll bar 顏色 */
+  border-radius: 10px;
+}
+
+.todo-item-content {
+  display: flex;
+  gap: 12px;
+  min-width: 0; /* 允許彈性盒子的子元素（這裡是 span）縮小到小於其內容的寬度 */
+}
+
+.todo-item-content span {
+  overflow: hidden; /* 隱藏超出容器的内容 */
+  text-overflow: ellipsis; /* 當超過一行時，顯示省略號 */
+}
+
+/* 清單項目 */
+#todo-list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 6px 16px 6px 12px;
+  background-color: var(--lighter-primary);
+  border-radius: 40px;
+  letter-spacing: 0.1rem;
+}
+
+/* 清單項目(已完成) */
+#todo-list li.completed {
+  color: rgb(115, 115, 115);
+  text-decoration: line-through;
+  background-color: #eeeeee;
+}
+
+/* 清單項目分隔線 */
+#todo-list li:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+/* 輸入框外容器 */
+#input-container {
+  display: flex;
+}
+
+/* 輸入框 */
+#todo-input {
+  border-radius: 24px 0 0 24px;
+  border-right: 0px;
+  background-color: var(--lighter-primary);
+  border: none;
+  padding: 8px;
+  padding-left: 16px;
+  font-size: 1rem;
+}
+
+/* 輸入框 hover */
+#todo-input:hover {
+  background-color: rgb(241, 241, 241);
+  border: none;
+  transition: background-color 0.2s;
+}
+
+/* 新增項目按鈕 */
+#add-todo {
+  cursor: pointer;
+  border-radius: 0 24px 24px 0;
+  border: none;
+  padding: 8px;
+  padding-right: 16px;
+  background-color: var(--normal-primary);
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+}
+
+/* 新增項目按鈕hover */
+#add-todo:hover {
+  background-color: var(--darker-primary);
+  color: rgb(255, 255, 255);
+  transition: background-color 0.2s;
+}
+
+/* 空清單提示(容器) */
+#empty-message-container {
+  margin: 24px 0;
+  width: 100%;
+}
+
+/* 空清單提示(文字) */
+#empty-message {
+  text-align: center;
+  color: #8d8d8d;
+}
+
+/* 是否完成checkbox */
+.done-checkbox {
+  cursor: pointer;
+  /* Hide the checkbox */
+  -webkit-appearance: none;
+  appearance: none;
+  /* custom checkbox */
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  position: relative;
+  align-self: center;
+}
+
+/* 是否完成checkbox(已完成) */
+.done-checkbox:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: var(--normal-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 是否完成checkbox(hover) */
+.done-checkbox:hover::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: var(--darker-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 刪除按鈕 */
+.delete-button {
+  background: none;
+  border: none;
+  color: #888888;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+/* 刪除按鈕hover */
+.delete-button:hover {
+  color: var(--normal-primary);
+}
+
+/* 刪除按鈕active */
+.delete-button:active {
+  color: var(--darker-primary);
+}
+
+/* 編輯標題icon */
+#edit-icon {
+  cursor: pointer;
+}
+
+#edit-icon:hover {
+  color: var(--darker-primary);
+}
+
+/* 清空清單 */
+#clear-list {
+  cursor: pointer;
+  color: var(--darker-primary);
+}
+
+#clear-list:hover {
+  color: var(--normal-primary);
+}
+
+/* 選色盤 */
+#page {
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  z-index: -1;
+}
+
+.page-sticker {
+  cursor: pointer;
+  width: 30px;
+  height: 20px;
+  margin-bottom: 5px;
+  transform-origin: left center;
+  transition: all 0.3s ease;
+}
+
+.page-sticker:hover {
+  width: 40px;
+}
+
+.page-sticker.active {
+  width: 40px;
+}
+
+#page_blue {
+  background-color: #bdc4e8;
+  border: solid 1px #a1ade9;
+}
+
+#page_green {
+  background-color: #bde8d3;
+  border: solid 1px #75bf9b;
+}
+
+#page_yellow {
+  background-color: #ffe397;
+  border: solid 1px #f1b100;
+}
+
+#page_pink {
+  background-color: #eed7eb;
+  border: solid 1px #ffb1f5;
+}
+
+/* 計數器上距 */
+#count-container {
+  padding-top: 12px;
+}
